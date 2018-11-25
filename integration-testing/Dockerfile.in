@@ -1,4 +1,4 @@
-FROM coop.rchain/rnode:latest
+FROM coop.rchain/rnode:@@TAG@@
 
 RUN apt-get update && apt-get -yq install curl nmap
 
