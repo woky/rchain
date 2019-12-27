@@ -16,6 +16,27 @@ on:
       - dev
 
 jobs:
+  debug:
+    name: DEBUG
+    runs-on: ubuntu-latest
+    container: rchain/buildenv
+    env:
+      _GITHUB_OBJECT: ${{ toJSON(github) }}
+    steps:
+      - name: Collect Debug Information
+        run: |
+          mkdir debug-info
+          cp $GITHUB_EVENT_PATH debug-info
+          echo "$_GITHUB_OBJECT" >debug-info/github-object.json
+          java -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal -version \
+              >debug-info/java-default-flags.txt
+
+      - name: Upload Debug Info
+        uses: actions/upload-artifact@v1
+        with:
+          name: debug-info
+          path: debug-info
+
   # Most jobs run in rchain/buildenv Docker container. This container image has
   # everything needed to build RChain and run unit and integration tests. For
   # more information about the image see
