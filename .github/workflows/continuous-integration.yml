@@ -66,10 +66,9 @@ jobs:
 
 
   # Get compiled RChain and run unit tests.
-  _run_unit_tests:
+  run_unit_tests:
     name: Unit Tests
     needs: build_base
-    if: false
     runs-on: ubuntu-latest
     container: rchain/buildenv
     strategy:
@@ -223,10 +222,9 @@ jobs:
   # workarounds (see below).
   #
   # [1] https://github.community/t5/GitHub-Actions/Container-volumes-key-not-mounting-volume/m-p/34798
-  _run_integration_tests:
+  run_integration_tests:
     name: Integration Tests
     needs: build_docker_image
-    if: false
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -313,22 +311,6 @@ jobs:
       # in future workflow runs. See note above.
       - name: Fix Cache Permissions (Post)
         run: sudo chown -R $(id -u):$(id -g) ${{ env.HOST_CACHE_ROOT }}
-
-
-  run_unit_tests:
-    name: Unit Tests
-    needs: build_base
-    runs-on: ubuntu-latest
-    steps:
-      - run: true
-
-
-  run_integration_tests:
-    name: Integration Tests
-    needs: build_docker_image
-    runs-on: ubuntu-latest
-    steps:
-      - run: true
 
 
   # release_* jobs make built artifacts available to public and run only on new
