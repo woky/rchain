@@ -14,7 +14,7 @@ Global / dependencyOverrides := Dependencies.overrides
 
 lazy val projectSettings = Seq(
   organization := "coop.rchain",
-  scalaVersion := "2.12.8",
+  scalaVersion := "2.13.1",
   version := "0.1.0-SNAPSHOT",
   resolvers ++= Seq(
     Resolver.sonatypeRepo("releases"),
@@ -101,7 +101,7 @@ lazy val coverageSettings = Seq(
 )
 
 lazy val compilerSettings = CompilerSettings.options ++ Seq(
-  crossScalaVersions := Seq("2.11.12", scalaVersion.value)
+  crossScalaVersions := Seq("2.11.12", "2.12.8", scalaVersion.value)
 )
 
 // Before starting sbt export YOURKIT_AGENT set to the profiling agent appropriate
